@@ -1,6 +1,7 @@
 const dbConfig = require("../config/db.config");
 
 const mongoose = require("mongoose");
+mongoose.set("debug", true);
 mongoose.Promise = global.Promise;
 
 const db = {};

@@ -35,7 +35,7 @@ app.get("/", (req, res) => {
     });
 });
 
-require("./src/routes/api/v1/user.route")(app, "/user");
+require("./src/routes/api/v1/user.route")(app, "/api/v1/users");
 
 const PORT = global.process.env.PORT || 3000;
 app.listen(PORT, () => {

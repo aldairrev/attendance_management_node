@@ -27,6 +27,10 @@ module.exports = {
             "error",
             "always"
         ],
-        "no-unused-vars": 0
+        "no-unused-vars": 0,
+        "object-curly-spacing": [
+            "error",
+            "always"
+        ]
     }
 };
