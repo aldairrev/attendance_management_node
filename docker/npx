@@ -1,0 +1,5 @@
+#!/bin/bash
+args="$@"
+command="npx $args"
+echo "$command"
+docker exec -it aldairrev_attendance_management_node-app bash -c "/bin/bash -c \"$command\""

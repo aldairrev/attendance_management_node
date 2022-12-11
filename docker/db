@@ -1,0 +1,7 @@
+#!/bin/bash
+export $(xargs < .env)
+
+args="$@"
+command="mongosh $args"
+echo "$command"
+docker exec -it aldairrev_attendance_management_node-db bash -c "/bin/bash -c \"$command\""

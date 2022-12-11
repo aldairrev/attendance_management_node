@@ -1,0 +1,53 @@
+version: "3.7"
+
+services:
+  app:
+    container_name: aldairrev_attendance_management_node-app
+    user: node
+    restart: always
+    image: aldairrev_attendance_management_node:latest
+    build:
+      context: ./
+      dockerfile: Dockerfile
+    env_file: ./.env
+    working_dir: /home/node/app
+    ports:
+      - $NODE_LOCAL_PORT:$NODE_DOCKER_PORT
+    environment:
+      - DB_HOST=$MONGODB_HOST
+      - DB_USER=$MONGODB_USER
+      - DB_PASSWORD=$MONGODB_PASSWORD
+      - DB_NAME=$MONGODB_DATABASE
+      - DB_PORT=$MONGODB_DOCKER_PORT
+    stdin_open: true
+    tty: true
+    links:
+      - mongo
+    volumes:
+      - ./:/home/node/app
+      - node_modules:/home/node/app/node_modules
+  mongo:
+    container_name: aldairrev_attendance_management_node-db
+    image: mongo:5.0.2
+    restart: unless-stopped
+    env_file: ./.env
+    logging:
+      driver: "none"
+    environment:
+      - MONGO_INITDB_ROOT_USERNAME=$MONGODB_USER
+      - MONGO_INITDB_ROOT_PASSWORD=$MONGODB_PASSWORD
+    ports:
+      - $MONGODB_LOCAL_PORT:$MONGODB_DOCKER_PORT
+    volumes:
+      - ./docker/mongodb/data:/data/db
+volumes:
+  node_modules:
+    driver: local
+    driver_opts:
+      type: none
+      o: bind
+      device: ./node_modules
+networks:
+  default:
+    external:
+      name: aldairrev_attendance_management_node
