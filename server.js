@@ -14,15 +14,13 @@ app.use(express.urlencoded({ extended: true }));
 
 const db = require("./src/models");
 
-console.log(db.url);
-
 db.mongoose
     .connect(db.url, {
         useNewUrlParser: true,
         useUnifiedTopology: true
     })
     .then(() => {
-        console.log("Mongo Connect");
+        console.log("🍃 MongoDB Connected");
     })
     .catch(err => {
         console.log("Cannot connect to Mongo!", err);
