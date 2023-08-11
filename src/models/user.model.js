@@ -14,9 +14,8 @@ module.exports = mongoose => {
             type: String,
             required: [true, lang.user.email.required],
         },
-        created_at: { type: Number, default: Date.now() },
-        updated_at: { type: Number, default: Date.now() },
-    });
+        status: { type: Boolean, default: true, }
+    }, { timestamps: true });
 
     const model = mongoose.model("users", schema);
     return model;

@@ -169,12 +169,14 @@ exports.delete = async (req, res) => {
         });
     }
 
-    User.deleteOne({ _id: user._id }).then(deleted_user => {
-        res.send({ data: user });
-    }).catch(err => {
-        return res.status(500).send({
+    user.status = false;
+
+    user.save().then((deleted_user) => {
+        res.send({ "data": deleted_user });
+    }).catch((resp) => {
+        res.send({
             errors: {
-                message: lang.user.error
+                message: lang.server.error
             }
         });
     });
